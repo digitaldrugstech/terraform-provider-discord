@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := help
-export PATH := /home/haffk/.local/go/bin:$(PATH)
+# Add Go to PATH if not already available
+GO_BIN := $(or $(shell command -v go 2>/dev/null),$(HOME)/.local/go/bin/go)
+export PATH := $(dir $(GO_BIN)):$(PATH)
 
 .PHONY: build
 build: ## Build the Terraform provider binary
