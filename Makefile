@@ -23,6 +23,11 @@ vet: ## Run go vet for static analysis
 test: ## Run tests
 	go test ./...
 
+.PHONY: setup
+setup: ## First-time setup (copy .env if exists)
+	@test -f .env.example && (test -f .env || cp .env.example .env) || true
+	@echo "Setup complete."
+
 .PHONY: help
 help: ## Show this help message
 	@echo "Usage: make [target]"
